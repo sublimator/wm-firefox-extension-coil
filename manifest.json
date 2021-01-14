@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "WebMonetization",
+  "version": "1.0",
+  "permissions": ["monetization"],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
