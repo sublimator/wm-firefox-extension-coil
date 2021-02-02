@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <form>
+      <table>
+        <tr>
+          <td><label for="email">Email</label></td>
+          <td><input type="email" id="email" required></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password</label></td>
+          <td><input type="password" id="password" required></td>
+        </tr>
+        <tr>
+          <td><button>Save</button></td>
+        </tr>
+      </table>
+    </form>
+    <script>
+      const $ = sel => document.querySelector(sel);
+
+      $("form").addEventListener("submit", async ev => {
+        ev.preventDefault();
+        const email = $("#email").value;
+        const password = $("#password").value;
+        if (!email || !password) return;
+
+        const button = $("form button");
+        button.disabled = true;
+        await browser.storage.local.set({ email, password });
+        await new Promise(res => setTimeout(res, 1000));
+        button.disabled = false;
+      });
+
+      browser.storage.local
+        .get(["email", "password"])
+        .then(({ email, password }) => {
+          if (email) $("#email").value = email;
+          if (password) $("#password").value = password;
+        })
+        .catch(console.error);
+    </script>
+  </body>
+</html>
