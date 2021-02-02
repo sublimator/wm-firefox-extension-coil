@@ -2,8 +2,8 @@
 
 import { getFarFutureExpiry, timeout } from "../utils.js";
 
-import { Buffer } from "https://jspm.dev/buffer";
-import { createConnection } from "https://jspm.dev/ilp-protocol-stream";
+import { Buffer } from "https://jspm.dev/npm:buffer@6.0.3";
+import { createConnection } from "https://jspm.dev/npm:ilp-protocol-stream@2.6.5";
 
 const UPDATE_AMOUNT_TIMEOUT = 2000;
 /**

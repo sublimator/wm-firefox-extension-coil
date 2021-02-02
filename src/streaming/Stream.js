@@ -3,8 +3,8 @@ import { timeout } from "../utils.js";
 import { AdaptiveBandwidth } from "./AdaptiveBandwidth.js";
 import { StreamAttempt } from "./StreamAttempt.js";
 
-import { Buffer } from "https://jspm.dev/buffer";
-import IlpPluginBtp from "https://jspm.dev/ilp-plugin-btp";
+import { Buffer } from "https://jspm.dev/npm:buffer@6.0.3";
+import IlpPluginBtp from "https://jspm.dev/npm:ilp-plugin-btp@1.4.2";
 
 const BTP_ENDPOINT = "btp+wss://coil.com/btp";
 
