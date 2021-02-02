@@ -1,4 +1,4 @@
-Boilterplate for a WebMonetization extension to work with a native prototype WebMonetization implementation of Firefox at https://github.com/sidvishnoi/gecko-webmonetization/.
+A sample WebMonetization extension to demonstrate WebMonetization in a Firefox implementation (prototype) at https://github.com/sidvishnoi/gecko-webmonetization/. This extension is based on the [Coil WebMonetization extension](https://github.com/coilhq/web-monetization-projects/tree/189b612/packages/coil-extension).
 
 ## How to use?
 
