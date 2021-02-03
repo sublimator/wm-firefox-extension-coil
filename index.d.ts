@@ -136,8 +136,3 @@ namespace IStream {
     receipt?: string;
   }
 }
-
-declare function setImmediate(
-  handler: TimerHandler,
-  ...arguments: any[]
-): number;

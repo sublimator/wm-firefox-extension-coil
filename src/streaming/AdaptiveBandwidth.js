@@ -1,7 +1,9 @@
 // @ts-check
 class BandwidthTiers {
-  _BASE_TIER = 1;
-  _BANDWIDTH_MAP = [0, 100000, 150000, 250000];
+  constructor() {
+    this._BASE_TIER = 1;
+    this._BANDWIDTH_MAP = [0, 100000, 150000, 250000];
+  }
 
   async getBandwidth(_url) {
     return this._BANDWIDTH_MAP[this._BASE_TIER];

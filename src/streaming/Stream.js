@@ -11,11 +11,6 @@ const BTP_ENDPOINT = "btp+wss://coil.com/btp";
 // let ATTEMPT = 0;
 
 export class Stream {
-  /** @type {number} */
-  _lastOutgoingMs = null;
-  /** @type {number} */
-  _packetNumber = null;
-
   /**
    * @param {string} btpToken
    * @param {SPSPResponse} spspResponse
