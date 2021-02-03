@@ -3,7 +3,7 @@ import { tokens } from "./auth.js";
 import { Stream } from "./streaming/Stream.js";
 
 /**
- * @typedef {"pending" | "active" | "stopped"} State
+ * @typedef {"pending" | "active" | "stopped" | "paused"} State
  * @typedef {{ destinationAccount: string, sharedSecret: string, receiptsEnabled: boolean }} SpspResponse
  */
 
@@ -46,24 +46,25 @@ class Monetization {
   stop(sessionId) {
     const session = this.sessions.get(sessionId);
     if (session) {
-      session.state = "stopped";
+      session.state = "stopped"; // more of a documentation
       session.stream.stop();
+      this.sessions.delete(sessionId);
     }
   }
 
   pause(sessionId) {
     const session = this.sessions.get(sessionId);
     if (session && session.state === "active") {
-      session.state = "stopped";
-      session.stream.pause();
+      session.state = "paused";
+      session.stream.stop();
     }
   }
 
-  resume(sessionId) {
+  resume(sessionId, restart) {
     const session = this.sessions.get(sessionId);
-    if (session && session.state === "stopped") {
-      session.state = "active";
-      session.stream.resume();
+    if (session && session.state === "paused") {
+      this.sessions.delete(sessionId);
+      restart(sessionId);
     }
   }
 }

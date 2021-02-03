@@ -27,6 +27,13 @@ browser.monetization.onPause.addListener(sessionId => {
 browser.monetization.onResume.addListener(sessionId => {
   console.group("onResume");
   console.log({ sessionId });
-  monetization.resume(sessionId);
+  monetization.resume(sessionId, async sessId => {
+    const newSessionId = await browser.monetization.refresh(sessId);
+    console.log(
+      `%conResume:%c ${sessId} 👉 ${newSessionId}`,
+      "font-weight: bold",
+      "font-weight: normal"
+    );
+  });
   console.groupEnd();
 });
