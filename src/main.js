@@ -28,7 +28,7 @@ class Monetization {
     }
 
     const onMoney = data => {
-      console.log(data);
+      console.info(data);
       const amount = {
         value: data.amount,
         assetCode: data.assetCode,
