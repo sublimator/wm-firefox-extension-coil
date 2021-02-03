@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "WebMonetization",
+  "name": "WebMonetizationDemo",
   "version": "1.0",
   "permissions": ["monetization", "storage"],
   "background": {
