@@ -6,28 +6,9 @@ import { Buffer } from "https://jspm.dev/npm:buffer@6.0.3";
 import { createConnection } from "https://jspm.dev/npm:ilp-protocol-stream@2.6.5";
 
 const UPDATE_AMOUNT_TIMEOUT = 2000;
-/**
- * @typedef {any} Connection
- * @typedef {any} DataAndMoneyStream
- * @typedef {any} IlpPluginBtp
- * @typedef {import('./Stream.js').SPSPResponse} SPSPResponse
- * @typedef {import('./Stream.js').OnMoneyEvent} OnMoneyEvent
- *
- * @typedef {{
- *   spspDetails: SPSPResponse,
- *   bandwidth: import('./AdaptiveBandwidth.js').AdaptiveBandwidth,
- *   onMoney: (event: OnMoneyEvent) => void,
- *   plugin: IlpPluginBtp,
- * }} StreamAttemptOptions
- */
 
 export class StreamAttempt {
-  /** @type {DataAndMoneyStream} */
-  _ilpStream = null;
-  /** @type {Connection} */
-  _connection = null;
-
-  /** @param {StreamAttemptOptions} opts */
+  /** @param {IStreamAttempt.StreamAttemptOptions} opts */
   constructor(opts) {
     this._onMoney = opts.onMoney;
     this._bandwidth = opts.bandwidth;

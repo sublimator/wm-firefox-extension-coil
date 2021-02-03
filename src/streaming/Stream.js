@@ -10,36 +10,6 @@ const BTP_ENDPOINT = "btp+wss://coil.com/btp";
 
 // let ATTEMPT = 0;
 
-/**
- * @typedef {{
- *   packetNumber: number,
- *   msSinceLastPacket: number,
- *   sentAmount: string,
- *   amount: string,
- *   assetCode: string,
- *   assetScale: number,
- *   sourceAmount: string,
- *   sourceAssetCode: string,
- *   sourceAssetScale: number,
- *   receipt?: string,
- * }}  StreamMoneyEvent
-
- * @typedef {{
- *   sentAmount: string
- *   amount: number
- *   assetCode: string
- *   assetScale: number
- *   sourceAmount: string
- *   sourceAssetCode: string
- *   sourceAssetScale: number
- *   receipt?: string
- * }} OnMoneyEvent
-
- * @typedef {{ destinationAccount: string, sharedSecret: string, receiptsEnabled: boolean }} SPSPResponse
- * @typedef {any} Connection
- * @typedef {any} DataAndMoneyStream
- */
-
 export class Stream {
   /** @type {number} */
   _lastOutgoingMs = null;
@@ -49,7 +19,7 @@ export class Stream {
   /**
    * @param {string} btpToken
    * @param {SPSPResponse} spspResponse
-   * @param {(event: StreamMoneyEvent) => void} emitMoney
+   * @param {(event: IStream.StreamMoneyEvent) => void} emitMoney
    */
   constructor(btpToken, spspResponse, emitMoney) {
     this._btpToken = btpToken;
@@ -159,14 +129,14 @@ export class Stream {
     return plugin;
   }
 
-  /** @param {OnMoneyEvent} data */
+  /** @param {IStream.OnMoneyEvent} data */
   onMoney(data) {
     if (data.amount <= 0) return;
 
     const now = Date.now();
     const msSinceLastPacket = now - this._lastOutgoingMs;
     this._lastOutgoingMs = now;
-    /** @type {StreamMoneyEvent} */
+    /** @type {IStream.StreamMoneyEvent} */
     const event = Object.assign(data, {
       packetNumber: this._packetNumber++,
       msSinceLastPacket: msSinceLastPacket,
@@ -211,10 +181,7 @@ export class Stream {
   }
 }
 
-/**
- * @param {string} preimage
- * @returns {Promise<Buffer>}
- */
+/** @param {string} preimage */
 async function sha256(preimage) {
   const preimageBuf = Buffer.from(preimage);
   const digest = await crypto.subtle.digest({ name: "SHA-256" }, preimageBuf);
